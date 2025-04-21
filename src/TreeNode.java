@@ -39,33 +39,27 @@ public class TreeNode<T>{
     }
 
     //O(n)
-    public void inorder(TreeNode<T> node){
+    public String inorder(TreeNode<T> node){
         if (node == null){
-            return;
+            return "";
         }
-        inorder(node.getLeft());
-        System.out.println(node.getElement());
-        inorder(node.getRight());
+        return inorder(node.getLeft()) + node.getElement() + inorder(node.getRight());
     }
 
     //O(n)
-    public void preorder(TreeNode<T> node){
+    public String preorder(TreeNode<T> node){
         if (node == null){
-            return;
+            return "";
         }
-        System.out.println(node.getElement());
-        preorder(node.getLeft());
-        preorder(node.getRight());
+        return node.getElement() + preorder(node.getLeft()) + preorder(node.getRight());
     }
 
     //O(n)
-    public void postorder(TreeNode<T> node){
+    public String postorder(TreeNode<T> node){
         if (node == null){
-            return;
+            return "";
         }
-        postorder(node.getLeft());
-        postorder(node.getRight());
-        System.out.println(node.getElement());
+        return postorder(node.getLeft()) + postorder(node.getRight()) + node.getElement();
     }
 
     //O(n)   //Null node = -1; Leaf node = 0; Anything else: 1 + max of descendants
