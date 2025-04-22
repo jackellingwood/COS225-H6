@@ -10,8 +10,9 @@ public class MorseTester {
         try (Scanner s = new Scanner(new File(path))) {
             String letterOfNode;
             
+            // go line by line, first letter is always the letter to add, then assemble the tree accordingly with the rest of the line.
             while (s.hasNextLine()) {
-                t = mt.tree;
+                t = mt.tree; // reset pointer to start
                 letterOfNode = s.next();
                 while (s.hasNext()) {
                     String c = s.next();
@@ -34,7 +35,7 @@ public class MorseTester {
                 s.nextLine();
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("File Not Found");
         }
 
         return mt;
@@ -45,5 +46,7 @@ public class MorseTester {
         MorseTree tree = fromFile("morse.txt");
 
         System.out.println(tree.preorder());
+        System.out.println(tree.postorder());
+        System.out.println(tree.toPlain("- | . . . . | . |"));
     }
 }

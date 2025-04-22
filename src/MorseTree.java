@@ -18,10 +18,32 @@ public class MorseTree {
     }
 
     // public String toMorse(String input) {
-    //     char[] charArr = new char[input.length()];
-    //     input.getChars(0, input.length(), charArr, 0);
-    //     for (char c: charArr) {
+    //     for (char c: input.toCharArray()) {
             
     //     }
     // } 
+
+    // O(logn)
+    public String toPlain(String input) {
+        String out = "";
+        TreeNode<String> ptr = tree;
+        for (char c: input.toCharArray()) {
+            switch (c) {
+                case '.':
+                    ptr = ptr.getLeft();
+                    break;
+                case '-':
+                    ptr = ptr.getRight();
+                    break;
+                case '|':
+                    out += ptr.getElement();
+                    ptr = tree; //reset pointer
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return out;
+    }
 }
