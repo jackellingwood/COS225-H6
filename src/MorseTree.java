@@ -1,8 +1,8 @@
 public class MorseTree {
-    public TreeNode<String> tree;
+    public TreeNode<Character> tree;
 
     public MorseTree() {
-        tree = new TreeNode<>("");
+        tree = new TreeNode<>('\0');
     }
 
     public String preorder() {
@@ -17,16 +17,34 @@ public class MorseTree {
         return tree.postorder(tree);
     }
 
-    // public String toMorse(String input) {
-    //     for (char c: input.toCharArray()) {
-            
-    //     }
-    // } 
+    // O(nlogn)
+    public String toMorse(String input) {
+        input = input.toLowerCase();
+        String out = "";
+        TreeNode<Character> ptr;
+        for (char c: input.toCharArray()) {
+            ptr = tree;
+            if (ptr.isIn(c)) { // check if char is in tree at all, if not, skip
+                while (!ptr.getElement().equals(c)) {
+                    if (ptr.getLeft().isIn(c)) {
+                        ptr = ptr.getLeft();
+                        out += ". ";
+                    } else {
+                        ptr = ptr.getRight();
+                        out += "- ";
+                    }
+                }
+                out += "| ";
+            }
+        }
+
+        return out;
+    } 
 
     // O(logn)
     public String toPlain(String input) {
         String out = "";
-        TreeNode<String> ptr = tree;
+        TreeNode<Character> ptr = tree;
         for (char c: input.toCharArray()) {
             switch (c) {
                 case '.':

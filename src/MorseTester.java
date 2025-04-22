@@ -6,14 +6,14 @@ public class MorseTester {
 
     public static MorseTree fromFile(String path) {
         MorseTree mt = new MorseTree();
-        TreeNode<String> t;
+        TreeNode<Character> t;
         try (Scanner s = new Scanner(new File(path))) {
-            String letterOfNode;
+            Character letterOfNode;
             
             // go line by line, first letter is always the letter to add, then assemble the tree accordingly with the rest of the line.
             while (s.hasNextLine()) {
                 t = mt.tree; // reset pointer to start
-                letterOfNode = s.next();
+                letterOfNode = s.next().charAt(0);
                 while (s.hasNext()) {
                     String c = s.next();
                     if (c.equals(".")) {
@@ -35,7 +35,7 @@ public class MorseTester {
                 s.nextLine();
             }
         } catch (FileNotFoundException e) {
-            System.out.println("File Not Found");
+            System.err.println("File Not Found");
         }
 
         return mt;
@@ -43,10 +43,16 @@ public class MorseTester {
 
 
     public static void main(String[] args) {
-        MorseTree tree = fromFile("morse.txt");
+        MorseTree tree = fromFile("editedmorse.txt");
 
         System.out.println(tree.preorder());
         System.out.println(tree.postorder());
-        System.out.println(tree.toPlain("- | . . . . | . |"));
+
+        String testString = "The quick fox.";
+        System.out.println("Original  : " + testString);
+        testString = tree.toMorse(testString);
+        System.out.println("Morse     : " + testString);
+        testString = tree.toPlain(testString);
+        System.out.println("Plaintext : " + testString);
     }
 }
