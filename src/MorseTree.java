@@ -2,7 +2,7 @@ public class MorseTree {
     public TreeNode<Character> tree;
 
     public MorseTree() {
-        tree = new TreeNode<>('\0');
+        tree = new TreeNode<>('\0'); // '\0' is Character's null
     }
 
     public String preorder() {
@@ -17,7 +17,7 @@ public class MorseTree {
         return tree.postorder(tree);
     }
 
-    // O(nlogn)
+    // O(nlogn * input len) for each char
     public String toMorse(String input) {
         input = input.toLowerCase();
         String out = "";
@@ -25,7 +25,7 @@ public class MorseTree {
         for (char c: input.toCharArray()) {
             ptr = tree;
             if (ptr.isIn(c)) { // check if char is in tree at all, if not, skip
-                while (!ptr.getElement().equals(c)) {
+                while (!ptr.getElement().equals(c)) { // check whether char is in left or right subtrees
                     if (ptr.getLeft().isIn(c)) {
                         ptr = ptr.getLeft();
                         out += ". ";
@@ -41,7 +41,7 @@ public class MorseTree {
         return out;
     } 
 
-    // O(logn)
+    // O(logn * input len)
     public String toPlain(String input) {
         String out = "";
         TreeNode<Character> ptr = tree;

@@ -6,28 +6,28 @@ public class MorseTester {
 
     public static MorseTree fromFile(String path) {
         MorseTree mt = new MorseTree();
-        TreeNode<Character> t;
+        TreeNode<Character> ptr;
         try (Scanner s = new Scanner(new File(path))) {
             Character letterOfNode;
             
             // go line by line, first letter is always the letter to add, then assemble the tree accordingly with the rest of the line.
             while (s.hasNextLine()) {
-                t = mt.tree; // reset pointer to start
+                ptr = mt.tree; // reset pointer to start
                 letterOfNode = s.next().charAt(0);
                 while (s.hasNext()) {
                     String c = s.next();
                     if (c.equals(".")) {
-                        if (t.getLeft() != null) {
-                            t = t.getLeft();
+                        if (ptr.getLeft() != null) {
+                            ptr = ptr.getLeft();
                         } else {
-                            t.insertLeft(letterOfNode);
+                            ptr.insertLeft(letterOfNode);
                             break;
                         }
                     } else if (c.equals("-")) {
-                        if (t.getRight() != null) {
-                            t = t.getRight();
+                        if (ptr.getRight() != null) {
+                            ptr = ptr.getRight();
                         } else {
-                            t.insertRight(letterOfNode);
+                            ptr.insertRight(letterOfNode);
                             break;
                         }
                     }
