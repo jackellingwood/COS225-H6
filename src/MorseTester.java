@@ -45,8 +45,8 @@ public class MorseTester {
     public static void main(String[] args) {
         MorseTree tree = fromFile("editedmorse.txt");
 
-        System.out.println(tree.preorder());
-        System.out.println(tree.postorder());
+        System.out.println("Preorder tree contents  : " + tree.preorder());
+        System.out.println("Postorder tree contents : " + tree.postorder());
 
         String testString = "The quick fox.";
         System.out.println("Original  : " + testString);

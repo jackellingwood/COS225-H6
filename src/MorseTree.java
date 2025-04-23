@@ -6,15 +6,15 @@ public class MorseTree {
     }
 
     public String preorder() {
-        return tree.preorder(tree);
+        return tree.preorder(tree).replace("", " ").trim(); // adds a space between each letter, .trim() ensures no leading or trailing spaces
     }
 
     public String inorder() {
-        return tree.inorder(tree);
+        return tree.inorder(tree).replace("", " ").trim();
     }
 
     public String postorder() {
-        return tree.postorder(tree);
+        return tree.postorder(tree).replace("", " ").trim();
     }
 
     // O(nlogn * input len) for each char
